@@ -26,6 +26,6 @@ const MenuWrapper = () => {
         <MenuItem />
       </div>
     </div>
-  );
-};
-export default MenuWrapper;
+    );
+  };
+  export default MenuWrapper;
