@@ -5,9 +5,13 @@ import Search from "../ui/Search";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
+  const cart = useSelector((state) => state.cart);
+
   const router = useRouter();
   return (
     <div
@@ -47,11 +51,18 @@ const Header = () => {
         </nav>
         <div className="flex gap-x-4 items-center">
           <Link href="/auth/login">
-            <FaUserAlt className="hover:text-primary transition-all cursor-pointer" />
+          <span>
+              <FaUserAlt className="hover:text-primary transition-all cursor-pointer" />
+            </span>
           </Link>
-          <a href="#">
-            <FaShoppingCart className="hover:text-primary transition-all cursor-pointer" />
-          </a>
+          <Link href="/cart">
+          <span className="relative">
+              <FaShoppingCart className="hover:text-primary transition-all cursor-pointer" />
+              <span className="w-4 h-4 text-xs grid place-content-center rounded-full bg-primary absolute -top-2 -right-3 text-black font-bold">
+                {cart.products.length === 0 ? "0" : cart.products.length}
+              </span>
+            </span>
+            </Link>
           <button onClick={() => setIsSearchModal(true)}>
             <FaSearch className="hover:text-primary transition-all cursor-pointer" />
           </button>
